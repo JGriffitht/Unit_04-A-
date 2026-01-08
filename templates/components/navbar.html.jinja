@@ -1,6 +1,7 @@
 <nav
   class="
-    relative text-white
+    fixed top-0 left-0 w-full z-50
+    text-white
     bg-[#0a0a0a]
 
     bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.05)_0px,rgba(255,255,255,0.05)_1px,rgba(0,0,0,1)_3px,rgba(0,0,0,1)_6px),
@@ -12,21 +13,27 @@
     shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_8px_24px_rgba(0,0,0,0.7)]
   "
 >
-  <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+  <div class="flex items-center justify-between pr-6 py-4">
 
-    <!-- Brand Image -->
-    <a href="#">
-      <img
-        src="/static/products/logo.png"
-        alt="Brand Logo"
-        class="h-35 w-auto object-contain"
-      />
-    </a>
 
-    <!-- Cart + Login -->
+    <img 
+      src="/static/products/logo.png" 
+      alt="Brand Logo" 
+      class="h-25 w-auto"
+    />
+
+
     <div class="flex items-center gap-6 text-sm uppercase tracking-[0.15em]">
-      <a href="#" class="hover:text-gray-300">Cart</a>
-      <a href="#" class="hover:text-gray-300">Login</a>
+      <a href="/cart" class="hover:text-gray-300">Cart</a>
+      {% if not current_user.is_Authenticated %}
+      <a href="/login" class="hover:text-gray-300">Login</a>
+      {% else %}
+<button class=""> 
+Hello {{ current_user.name }}
+
+</button>
+{% endif %}
+      <a href="/browse" class="hover:text-gray-300">Menu</a>
     </div>
 
   </div>

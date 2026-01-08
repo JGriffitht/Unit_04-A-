@@ -9,28 +9,18 @@
   <body class="bg-[#f9f9f5] min-h-screen flex flex-col">
 
     {% include 'components/navbar.html.jinja' %}
-{% for message in get_flashed_messages()%}
+    {% for message in get_flashed_messages() %}
     <li> {{message}} </li>
-{%endfor%}
+    {% endfor %}
+
     <div class="flex flex-1 items-center justify-center px-4">
       <div class="w-full max-w-md bg-white shadow-lg rounded-xl p-8 border border-gray-200">
 
         <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">
-          Create an account
+          Login to your account
         </h2>
 
-        <form method="POST" action="/register">
-
-          <label class="block mb-4">
-            <span class="text-gray-700 text-sm font-medium">Full Name</span>
-            <input
-              type="text"
-              name="name"
-              required
-              class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg bg-[#fafaf5] focus:outline-none focus:ring-2 focus:ring-gray-400"
-            />
-          </label>
-
+        <form method="POST" action="/login">
           <label class="block mb-4">
             <span class="text-gray-700 text-sm font-medium">Email</span>
             <input
@@ -41,7 +31,7 @@
             />
           </label>
 
-          <label class="block mb-4">
+          <label class="block mb-6">
             <span class="text-gray-700 text-sm font-medium">Password</span>
             <input
               type="password"
@@ -51,43 +41,23 @@
             />
           </label>
 
-          <label class="block mb-6">
-            <span class="text-gray-700 text-sm font-medium">Confirm Password</span>
-            <input
-              type="password"
-              name="confirm_password"
-              required
-              class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg bg-[#fafaf5] focus:outline-none focus:ring-2 focus:ring-gray-400"
-            />
-          </label>
-          
-          <label>
-          <span class="text-gray-700 text-sm font-medium">Address</span>
-<input
-type="address"
-name="address"
-class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg bg-[#fafaf5] focus:outline-none focus:ring-2 focus:ring-gray-400"
-/>
-          </label>
-
-
-          <button
+         <button
   type="submit"
-  class="relative mt-6 w-full md:w-auto py-2.5 px-30 
+  class="relative mt-4 w-full md:w-auto py-2.5 px-42
          text-white rounded-full font-medium tracking-wide
          bg-[url('https://www.onlygfx.com/wp-content/uploads/2016/01/oak-wood.png')]
          bg-cover bg-center shadow-md overflow-hidden
          hover:brightness-90 transition"
 >
   <span class="absolute inset-0 bg-black/60"></span>
-  <span class="relative">Create An Account</span>
+  <span class="relative">Login</span>
 </button>
         </form>
 
         <p class="text-center text-sm text-gray-600 mt-4">
-          Already have an account?
-          <a href="/login" class="text-gray-900 font-medium underline">
-            Login
+          Don't have an account?
+          <a href="/register" class="text-gray-900 font-medium underline">
+            Sign up
           </a>
         </p>
 

@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+
+  <body class="bg-[#f9f9f5] min-h-screen flex flex-col">
+
+    {% include 'components/navbar.html.jinja' %}
+
+    <div class="flex flex-1 items-start justify-center px-4 py-10">
+      <div class="w-full max-w-4xl">
+
+        <h1 class="text-3xl font-semibold text-gray-800 mb-8 text-center">
+          Our Menu
+        </h1>
+
+     <div class="bg-[#f9f9f5] min-h-screen">
+    <main class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto p-7">
+
+        {% for x in products %}
+        <a href="/products/{{ x['ID'] }}" class="block">
+
+            <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4 hover:shadow-md hover:scale-[1.02] transition transform">
+
+                <img
+                    class="h-48 w-full object-contain bg-[#f3f3ed] rounded-lg"
+                    src="{{ x['Image'] }}"
+                    alt="{{ x['Name'] }}"
+                >
+
+                <p class="text-lg font-semibold text-gray-900 mt-4">
+                    {{ x["Name"] }}
+                </p>
+
+                <p class="text-gray-800 font-medium mt-1">
+                    ${{ x["Price"] }}
+                </p>
+
+                <p class="text-gray-600 text-sm mt-1">
+                    Size: {{ x["Size"] }}
+                </p>
+
+            </div>
+
+        </a>
+        {% endfor %}
+
+    </main>
+</div>
+  </body>
+</html>

@@ -83,7 +83,7 @@ def browse():
     return render_template("browse.html.jinja", products=result)
 
 
-@app.route("/product/<product_id>")
+@app.route("/products/<product_id>")
 def product_page(product_id):
     connection = connect_db()
 

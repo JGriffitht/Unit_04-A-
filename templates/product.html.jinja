@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+
+  {% include 'components/navbar.html.jinja' %}
+
+    <div class="mt-16 max-w-5xl mx-auto bg-white border border-gray-200 shadow-lg rounded-xl p-10 flex flex-col md:flex-row gap-10">
+
+      <img
+        src="{{ product['Image'] }}"
+        alt="{{ product['Name'] }}"
+        class="w-80 h-80 object-contain bg-[#f3f3ed] rounded-lg mx-auto md:mx-0"
+      >
+
+      <div class="flex-1">
+        <h1 class="text-3xl font-semibold text-gray-900">
+          {{ product["Name"] }}
+        </h1>
+
+        <p class="mt-4 text-xl font-medium text-gray-800">
+          $ {{ product["Price"] }}
+        </p>
+
+        <p class="mt-4 text-gray-700">
+          Size: <span class="font-medium">{{ product["Size"] }}</span>
+        </p>
+
+        <form method="post" action="/products/{{ product['ID'] }}/add_to_cart" class="mt-6">
+          <label class="text-gray-700 font-medium">
+            Qty:
+          </label>
+
+          <input
+            type="number"
+            name="qty"
+            value="1"
+            min="1"
+            max="4"
+            class="ml-2 w-20 px-3 py-2 border border-gray-300 rounded-lg bg-[#fafaf5] focus:outline-none focus:ring-2 focus:ring-gray-400"
+          >
+
+<button
+  type="submit"
+  class="relative mt-6 w-full md:w-auto py-2.5 px-8 
+         text-white rounded-full font-medium tracking-wide
+         bg-[url('https://www.onlygfx.com/wp-content/uploads/2016/01/oak-wood.png')]
+         bg-cover bg-center shadow-md overflow-hidden
+         hover:brightness-90 transition"
+>
+  <span class="absolute inset-0 bg-black/60"></span>
+  <span class="relative">Add to cart</span>
+</button>
+
+        </form>
+      </div>
+
+    </div>
+
+  </body>
+</html>
+
+
+
