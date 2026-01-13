@@ -24,7 +24,7 @@
 
     <div class="flex items-center gap-6 text-sm uppercase tracking-[0.15em]">
       <a href="/cart" class="hover:text-gray-300">Cart</a>
-      {% if not current_user.is_Authenticated %}
+      {% if not current_user.is_authenticated %}
       <a href="/login" class="hover:text-gray-300">Login</a>
       {% else %}
 <button class=""> 
