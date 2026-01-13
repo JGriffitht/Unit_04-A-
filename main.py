@@ -209,3 +209,63 @@ def cart():
     connection.close()
 
     return render_template("cart.html.jinja", cart=results)
+
+@app.route("/order")
+def order():
+    connection = connect_db
+
+    cursor = connection.cursor()
+ 
+@app.route("/checkout", methods =["POST","GET"])
+@login_required
+def checkout():
+   connection = connect_db()
+
+
+   cursor = connection.cursor()
+
+
+   cursor.execute("""
+       SELECT * FROM `Cart`
+       Join `Product` ON `Product`.`ID` = `Cart`.`ProductID`
+       WHERE `UserID` = %s            
+                 
+   """,(current_user.id))
+
+
+   result = cursor.fetchall()
+
+
+   if request.method == 'POST':
+       # create the sale in the database
+       cursor.execute("INSERT INTO `Sale` (`UserID`) VALUES (%s)", ( current_user.id, ) )
+       #store products bought
+       sale = cursor.lastrowid
+       for item in result:
+           cursor.execute( """
+                INSERT INTO `SaleCart`
+                     (`SaleID`,`ProductID`, `Quantity`)
+                VALUES
+                     (%s,%s,%s)
+                             
+                         
+                       """  , (sale, item['ProductID'], item['Quantity']))
+       # empty cart
+       cursor.execute("DELETE FROM `Cart` WHERE `UserID` = %s", (current_user.id,))
+       #thank you screen
+
+
+       return redirect('/thank-you')      
+
+
+   total = 0
+
+
+   for item in result:
+       total += item["Price"] * item["Quantity"]
+
+
+   connection.close()
+
+
+   return render_template("checkout.html.jinja", cart=result, total=total)

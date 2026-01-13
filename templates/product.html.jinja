@@ -7,7 +7,7 @@
   </head>
 
   {% include 'components/navbar.html.jinja' %}
-
+<form method="post" action="/product/{{ product['ID']}}/add_to_cart">
     <div class="mt-16 max-w-5xl mx-auto bg-white border border-gray-200 shadow-lg rounded-xl p-10 flex flex-col md:flex-row gap-10">
 
       <img
@@ -51,11 +51,12 @@
          bg-cover bg-center shadow-md overflow-hidden
          hover:brightness-90 transition"
 >
+
   <span class="absolute inset-0 bg-black/60"></span>
   <span class="relative">Add to cart</span>
 </button>
 
-        </form>
+</form>
       </div>
 
     </div>

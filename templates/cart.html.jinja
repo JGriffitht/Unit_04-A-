@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+ {% include 'components/navbar.html.jinja' %}
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,14 +8,22 @@
   </head>
   
   <body class="bg-[#f9f9f5] min-h-screen">
+    {% for x in cart%}
+    <img class="" src="{{x['image']}}">
 
-    {% include 'components/navbar.html.jinja' %}
+    {{x["Name"]}}</div>
+    ${{x["Price"]}}
+    Size:{{["Size"]}}
 
-    <div class="p-6">
-      <h1 class="text-3xl font-bold underline">
-        Hello world!
-      </h1>
-    </div>
-
+    <form method="post" action=""/cart/{{ x['ProductID'] }}/upgrade_qty">
+    <input name="qty" type="number" value="{{x['Quantity']}}">
+   <p>Total: ${{ x['Price'] * x['Quantity']}}</p>
+   <button type="submit"> Update </button>
+    </form>
+    <a class="" href="/checkout">
+    checkout
+    </a>
+    {%endfor%}
   </body>
+
 </html>
