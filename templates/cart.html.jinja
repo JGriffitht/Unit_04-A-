@@ -1,29 +1,69 @@
 <!doctype html>
 <html>
- {% include 'components/navbar.html.jinja' %}
+  {% include 'components/navbar.html.jinja' %}
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
-  
+
   <body class="bg-[#f9f9f5] min-h-screen">
-    {% for x in cart%}
-    <img class="" src="{{x['image']}}">
+    <div class="max-w-4xl mx-auto py-10 space-y-6">
 
-    {{x["Name"]}}</div>
-    ${{x["Price"]}}
-    Size:{{["Size"]}}
+      {% for x in cart %}
+      <div class="bg-white shadow rounded-lg p-6 flex gap-6 items-start">
 
-    <form method="post" action=""/cart/{{ x['ProductID'] }}/upgrade_qty">
-    <input name="qty" type="number" value="{{x['Quantity']}}">
-   <p>Total: ${{ x['Price'] * x['Quantity']}}</p>
-   <button type="submit"> Update </button>
-    </form>
-    <a class="" href="/checkout">
-    Checkout
-    </a>
-    {%endfor%}
+        <img src="{{ x['Image'] }}" class="w-32 h-32 object-cover rounded" />
+
+        <div class="flex-1 space-y-2">
+          <h2 class="text-xl font-semibold text-gray-800">
+            {{ x["Name"] }}
+          </h2>
+
+          <p class="text-gray-600 font-medium">
+            ${{ x["Price"] }}
+          </p>
+
+          <p class="text-gray-600">
+            Size: {{ x["Size"] }}
+          </p>
+
+          <form method="post" action="/cart/{{ x['ProductID'] }}/upgrade_qty" class="space-y-3">
+            <label class="block text-sm font-medium text-gray-700">
+              Quantity
+            </label>
+            <input 
+              name="qty" 
+              type="number" 
+              value="{{ x['Quantity'] }}"
+              class="w-20 border rounded px-2 py-1"
+            />
+
+            <p class="text-gray-700 font-semibold">
+              Total: ${{ x["Price"] * x["Quantity"] }}
+            </p>
+
+            <button 
+              type="submit"
+              class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition bg-[url('https://www.onlygfx.com/wp-content/uploads/2016/01/oak-wood.png')]
+         bg-cover bg-center shadow-md overflow-hidden
+         hover:brightness-90 transition"
+            >
+              Update
+            </button>
+          </form>
+        </div>
+
+      </div>
+      {% endfor %}
+<a 
+            href="/checkout"
+            class="inline-block mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition bg-[url('https://www.onlygfx.com/wp-content/uploads/2016/01/oak-wood.png')]
+         bg-cover bg-center shadow-md overflow-hidden
+         hover:brightness-90 transition"
+          >
+            Checkout
+          </a>
+    </div>
   </body>
-
 </html>

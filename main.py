@@ -269,3 +269,21 @@ def checkout():
 
 
    return render_template("checkout.html.jinja", cart=result, total=total)
+
+@app.route("/cart/<product_id>/upgrade_qty", methods=["POST"])
+@login_required
+def upgrade_qty(product_id):
+    qty = int(request.form["qty"])
+
+    connection = connect_db()
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        UPDATE `Cart`
+        SET `Quantity` = %s
+        WHERE `ProductID` = %s AND `UserID` = %s
+    """, (qty, product_id, current_user.id))
+
+    connection.close()
+
+    return redirect("/cart")
