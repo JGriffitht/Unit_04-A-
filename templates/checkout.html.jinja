@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+  {% include 'components/navbar.html.jinja' %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+
+  <body class="bg-[#f9f9f5] min-h-screen">
+    <div class="max-w-5xl mx-auto py-10 px-4">
+
+      <h1 class="text-3xl font-bold text-gray-800 mb-8">
+        Checkout
+      </h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <div class="md:col-span-2 space-y-6">
+          {% for item in cart %}
+          <div class="bg-white shadow rounded-lg p-5 flex gap-5">
+
+            <img 
+              src="{{ item['Image'] }}" 
+              class="w-28 h-28 object-cover rounded"
+            />
+
+            <div class="flex-1 space-y-1">
+              <h2 class="text-xl font-semibold text-gray-800">
+                {{ item["Name"] }}
+              </h2>
+
+              <p class="text-gray-600">
+                Price: ${{ item["Price"] }}
+              </p>
+
+              <p class="text-gray-600">
+                Quantity: {{ item["Quantity"] }}
+              </p>
+
+              <p class="font-semibold text-gray-800">
+                Item Total: ${{ item["Price"] * item["Quantity"] }}
+              </p>
+            </div>
+
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="bg-white shadow rounded-lg p-6 h-fit">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">
+            Order Summary
+          </h2>
+
+          <div class="space-y-2 text-gray-700">
+            {% for item in cart %}
+            <div class="flex justify-between">
+              <span>{{ item["Name"] }} (x{{ item["Quantity"] }})</span>
+              <span>${{ item["Price"] * item["Quantity"] }}</span>
+            </div>
+            {% endfor %}
+          </div>
+
+          <hr class="my-4">
+
+          <div class="flex justify-between text-lg font-bold text-gray-900">
+            <span>Total</span>
+            <span>${{ total }}</span>
+          </div>
+
+          <form method="POST" class="mt-6">
+            <button 
+              type="submit"
+              class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition bg-[url('https://www.onlygfx.com/wp-content/uploads/2016/01/oak-wood.png')]
+         bg-cover bg-center shadow-md overflow-hidden
+         hover:brightness-90 transition"
+            >
+              Place Order
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </body>
+</html>

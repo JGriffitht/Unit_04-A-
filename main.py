@@ -243,7 +243,7 @@ def checkout():
        sale = cursor.lastrowid
        for item in result:
            cursor.execute( """
-                INSERT INTO `SaleCart`
+                INSERT INTO `SaleProduct`
                      (`SaleID`,`ProductID`, `Quantity`)
                 VALUES
                      (%s,%s,%s)
@@ -269,6 +269,10 @@ def checkout():
 
 
    return render_template("checkout.html.jinja", cart=result, total=total)
+
+@app.route("/thank-you")
+def thankyou():
+        return render_template("thankyou.html.jinja")
 
 @app.route("/cart/<product_id>/upgrade_qty", methods=["POST"])
 @login_required
